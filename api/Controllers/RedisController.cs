@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
-using StackExchange.Redis;
 
 namespace aspnet_core_docker_workshop.Controllers
 {
     [Route("api/[controller]")]
     public class RedisController : ControllerBase
     {
-        private readonly IDistributedCache _distributedCache;
         private readonly IRedisDatabase _redisDatabase;
-        public RedisController(IDistributedCache distributedCache, IRedisDatabase redisDatabase)
+        public RedisController(IRedisDatabase redisDatabase)
         {
             _redisDatabase = redisDatabase;
-            _distributedCache = distributedCache;
         }
 
         [HttpPost]
