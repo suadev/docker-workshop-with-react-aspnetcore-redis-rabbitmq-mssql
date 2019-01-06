@@ -1,0 +1,51 @@
+version: '3.7'
+
+services:
+  # rabbitmq:
+  #   image: rabbitmq:3-management
+  #   container_name: rabbitmq
+  #   ports:
+  #     - "15672:15672"
+  #     - "5672:5672"
+  #   volumes:
+  #     - ./rabbitmq_data:/var/lib/rabbitmq/mnesia:rw 
+
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  api:
+    build: 
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: workshop_api
+    ports:
+      - "5000:80"
+    # depends_on:
+      # - rabbitmq
+      # - redis
+
+  ui:
+    build: 
+      context: ./react_ui
+      dockerfile: Dockerfile
+    container_name: workshop_ui
+    volumes:
+      - './react_ui/:/ui' #container'ı restart etmeden refresh etmiyor, normal mi?
+      - '/ui/node_modules'
+    ports:
+      - '5001:3000'
+    environment:
+      - NODE_ENV=development
+
+  # coredb:
+  #   build: 
+  #     context: ./db
+  #     dockerfile: Dockerfile
+  #   # environment:
+  #   #   - SA_PASSWORD=Aax_z!py
+  #   #   - ACCEPT_EULA=Y
+  #   ports:
+  #     - "1433:1433"
