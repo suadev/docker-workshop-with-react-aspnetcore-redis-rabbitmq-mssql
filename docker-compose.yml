@@ -32,9 +32,9 @@ services:
       context: ./react_ui
       dockerfile: Dockerfile
     container_name: workshop_ui
-    volumes:
-      - './react_ui/:/ui' #container'ı restart etmeden refresh etmiyor, normal mi?
-      - '/ui/node_modules'
+    # volumes:
+    #   - './react_ui/:/ui' #container'ı restart etmeden refresh etmiyor, normal mi?
+    #   - '/ui/node_modules'
     ports:
       - '5001:3000'
     environment:
