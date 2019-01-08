@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api.Data;
 
 namespace aspnet_core_docker_workshop.Migrations
 {
     [DbContext(typeof(TodoListDBContext))]
-    [Migration("20190108143940_initial")]
-    partial class initial
+    partial class TodoListDBContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +19,7 @@ namespace aspnet_core_docker_workshop.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("api.Data.Todo", b =>
+            modelBuilder.Entity("api.Models.TodoListModel", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,8 +28,6 @@ namespace aspnet_core_docker_workshop.Migrations
                     b.Property<DateTime>("DeadLine");
 
                     b.Property<string>("Description");
-
-                    b.Property<byte>("Status");
 
                     b.HasKey("Id");
 

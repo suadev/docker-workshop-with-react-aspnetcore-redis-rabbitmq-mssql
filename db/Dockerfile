@@ -1,3 +1,7 @@
+
+
+#docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Brt_z!py' -p 1433:1433 -d mcr.microsoft.com/mssql/server
+
 FROM mcr.microsoft.com/mssql/server
 
 ENV ACCEPT_EULA=Y

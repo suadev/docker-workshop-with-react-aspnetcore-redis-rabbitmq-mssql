@@ -1,4 +1,4 @@
-FROM microsoft/aspnetcore-build:2.0 AS build-env
+FROM microsoft/dotnet:2.2-sdk AS build-env
 
 WORKDIR /api
 
@@ -10,7 +10,7 @@ COPY . ./
 
 RUN dotnet publish -c Release -o out
 
-FROM microsoft/aspnetcore:2.0
+FROM microsoft/aspnetcore
 
 WORKDIR /api
 

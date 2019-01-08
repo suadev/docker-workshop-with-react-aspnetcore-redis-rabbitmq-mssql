@@ -15,8 +15,7 @@ namespace aspnet_core_docker_workshop.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Description = table.Column<string>(nullable: true),
-                    DeadLine = table.Column<DateTime>(nullable: false),
-                    Status = table.Column<byte>(nullable: false)
+                    DeadLine = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {

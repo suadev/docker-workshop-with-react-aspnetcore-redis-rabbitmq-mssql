@@ -21,7 +21,12 @@ namespace aspnet_core_docker_workshop
         {
             services.AddSingleton<IRedisDatabase, RedisDatabase>();
 
-            services.AddMvc();
+            services.AddMvc()
+            .AddJsonOptions(options =>
+            {
+                options.SerializerSettings.DateFormatString = "dd.MM.yyyy";
+            });
+
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll",
@@ -37,15 +42,6 @@ namespace aspnet_core_docker_workshop
 
             var connectionStr = "Server=localhost;database=docker-workshop;user id=sa;password=Brt_z!py;MultipleActiveResultSets=True;";
             services.AddDbContext<TodoListDBContext>(options => options.UseSqlServer(connectionStr));
-
-            //           services.AddEntityFrameworkSqlServer();
-            // services.AddDbContext<TodoListDBContext>((serviceProvider, options) =>
-            // {
-            //     options.UseSqlServer(connectionStr)
-            //     .UseInternalServiceProvider(serviceProvider);
-            // });
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

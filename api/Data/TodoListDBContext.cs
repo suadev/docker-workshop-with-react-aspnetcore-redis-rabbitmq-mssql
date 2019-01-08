@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using api.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Data
@@ -11,16 +12,6 @@ namespace api.Data
               : base(options)
         { }
 
-        public DbSet<Todo> Todos { get; set; }
-    }
-
-    public class Todo
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long Id { get; set; }
-        public string Description { get; set; }
-        public DateTime DeadLine { get; set; }
-        public byte Status { get; set; }
+        public DbSet<TodoListModel> Todos { get; set; }
     }
 }

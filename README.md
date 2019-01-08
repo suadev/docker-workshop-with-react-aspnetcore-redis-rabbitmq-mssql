@@ -1,5 +1,5 @@
 - Redis Connection over AspNetCore Web Api (**Done**)
-- MsSQL Connection over AspNetCore Web Api (**To do**)
+- MsSQL Connection over AspNetCore Web Api (**Done**)
 - RabbitMQ Connection over AspNetCore Web Api (**To do**)
 
 **Run with Docker-Compose**
