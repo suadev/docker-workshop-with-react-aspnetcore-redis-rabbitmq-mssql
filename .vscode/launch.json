@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/api/bin/Debug/netcoreapp2.0/aspnet-core-docker-workshop.dll",
+            "program": "${workspaceFolder}/api/bin/Debug/netcoreapp2.2/aspnet-core-docker-workshop.dll",
             "args": [],
             "cwd": "${workspaceFolder}/api",
             "stopAtEntry": false,

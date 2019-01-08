@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using api.Data;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -32,11 +34,18 @@ namespace aspnet_core_docker_workshop
                                 .Build();
                     });
             });
-            // services.AddDistributedRedisCache(option =>
+
+            var connectionStr = "Server=localhost;database=docker-workshop;user id=sa;password=Brt_z!py;MultipleActiveResultSets=True;";
+            services.AddDbContext<TodoListDBContext>(options => options.UseSqlServer(connectionStr));
+
+            //           services.AddEntityFrameworkSqlServer();
+            // services.AddDbContext<TodoListDBContext>((serviceProvider, options) =>
             // {
-            //     //"redis" => service name in docker-compose yml file.
-            //     option.Configuration = "127.0.0.1:6379"; // "redis"; // out of container => "127.0.0.1:6379"
+            //     options.UseSqlServer(connectionStr)
+            //     .UseInternalServiceProvider(serviceProvider);
             // });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +59,13 @@ namespace aspnet_core_docker_workshop
 
             app.UseMvc();
 
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<TodoListDBContext>())
+                {
+                    context.Database.Migrate();
+                }
+            }
         }
     }
 }
