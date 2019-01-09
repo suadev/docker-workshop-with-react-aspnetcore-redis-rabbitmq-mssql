@@ -36,7 +36,7 @@ namespace aspnet_core_docker_workshop
         {
             int dbName = 0;
             var dicKeyValue = new Dictionary<string, string>();
-            var keys = _connection.GetServer("redis").Keys(dbName, pattern: "*");
+            var keys = _connection.GetServer("127.0.0.1").Keys(dbName, pattern: "*");
             var keysArr = keys.Select(key => (string)key).ToArray();
 
             foreach (var key in keysArr)

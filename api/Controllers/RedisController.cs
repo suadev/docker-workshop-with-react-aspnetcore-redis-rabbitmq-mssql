@@ -21,6 +21,7 @@ namespace aspnet_core_docker_workshop.Controllers
             return Ok();
         }
 
+        [HttpGet]
         public async Task<IActionResult> Get()
         {
             var list = await _redisDatabase.StringGetAllAsync();

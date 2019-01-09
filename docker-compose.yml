@@ -19,6 +19,8 @@ services:
   mssql:
     image: mcr.microsoft.com/mssql/server
     container_name: mssql
+    volumes:
+      - './mssql_data:/var/opt/mssql'
     environment:
       - SA_PASSWORD=Brt_z!py
       - ACCEPT_EULA=Y

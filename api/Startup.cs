@@ -40,7 +40,8 @@ namespace aspnet_core_docker_workshop
                     });
             });
 
-            var connectionStr = "Server=localhost;database=docker-workshop;user id=sa;password=Brt_z!py;MultipleActiveResultSets=True;";
+            //local = >"Server=localhost;database=docker-workshop;user id=sa;password=Brt_z!py;MultipleActiveResultSets=True;";
+            var connectionStr = "Server=mssql;database=docker-workshop;user id=sa;password=Brt_z!py;";
             services.AddDbContext<TodoListDBContext>(options => options.UseSqlServer(connectionStr));
         }
 
