@@ -1,4 +1,6 @@
-﻿using api.Data;
+﻿using System;
+using api.Data;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -40,9 +42,20 @@ namespace aspnet_core_docker_workshop
                     });
             });
 
-            //local = >"Server=localhost;database=docker-workshop;user id=sa;password=Brt_z!py;MultipleActiveResultSets=True;";
-            var connectionStr = "Server=mssql;database=docker-workshop;user id=sa;password=Brt_z!py;";
+            var connectionStr = "Server=localhost;database=docker-workshop;user id=sa;password=Brt_z!py;MultipleActiveResultSets=True;"; //local
+            // var connectionStr = "Server=mssql;database=docker-workshop;user id=sa;password=Brt_z!py;"; //container
             services.AddDbContext<TodoListDBContext>(options => options.UseSqlServer(connectionStr));
+
+
+            services.AddMvc();
+            var bus = Bus.Factory.CreateUsingRabbitMq(cfg =>
+            {
+                var host = cfg.Host(new Uri("rabbitmq://localhost/"), h => { });
+            });
+            services.AddSingleton<IPublishEndpoint>(bus);
+            services.AddSingleton<ISendEndpointProvider>(bus);
+            services.AddSingleton<IBus>(bus);
+            bus.Start();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
