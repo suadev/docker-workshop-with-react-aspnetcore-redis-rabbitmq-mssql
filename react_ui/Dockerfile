@@ -1,8 +1,8 @@
 FROM node:9.6.1
 
-RUN mkdir /ui
+RUN mkdir ui
 
-WORKDIR /ui
+WORKDIR /ui 
 
 COPY package.json /ui/package.json
 

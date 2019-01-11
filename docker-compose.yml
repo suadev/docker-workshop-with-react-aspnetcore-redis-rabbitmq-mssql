@@ -8,7 +8,7 @@ services:
       - "15672:15672"
       - "5672:5672"
     volumes:
-      - ./rabbitmq_volume:/var/lib/rabbitmq/mnesia:rw 
+      - ./rabbitmq_volume:/var/lib/rabbitmq/mnesia
 
   redis:
     image: redis
@@ -23,7 +23,7 @@ services:
     image: mcr.microsoft.com/mssql/server
     container_name: mssql
     volumes:
-      - './mssql_volume:/var/opt/mssql'
+      - ./mssql_volume:/var/opt/mssql
     environment:
       - SA_PASSWORD=Brt_z!py
       - ACCEPT_EULA=Y
@@ -48,11 +48,10 @@ services:
       dockerfile: Dockerfile
     container_name: workshop_ui
     volumes:        
-      - './react_ui/:/ui' #container'ı restart etmeden refresh etmiyor, normal mi?
-      - '/ui/node_modules'
+      - ./react_ui:/ui
     ports:
       - '5001:3000'
     environment:
       - NODE_ENV=development
-    # depends_on:
-    #   - api
+    depends_on:
+      - api

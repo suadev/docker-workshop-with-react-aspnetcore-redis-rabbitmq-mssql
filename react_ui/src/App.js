@@ -60,7 +60,6 @@ class App extends Component {
       })
   }
 
-
   getFromRedis() {
     let self = this;
     fetch('http://localhost:5000/api/redis/', {
@@ -81,7 +80,6 @@ class App extends Component {
         console.log("error");
       });
   }
-
 
   getFromMssql() {
     let self = this;
