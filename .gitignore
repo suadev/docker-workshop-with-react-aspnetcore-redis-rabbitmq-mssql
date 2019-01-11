@@ -1,4 +1,5 @@
 /react_ui/.gitignore
 /api/.gitignore
-/mssql_data
-/rabbitmq_data
+/mssql_volume
+/rabbitmq_volume
+/redis_volume

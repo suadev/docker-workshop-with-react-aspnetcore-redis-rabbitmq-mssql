@@ -1,5 +1,7 @@
 FROM node:9.6.1
 
+RUN mkdir /ui
+
 WORKDIR /ui
 
 COPY package.json /ui/package.json

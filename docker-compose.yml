@@ -8,19 +8,22 @@ services:
       - "15672:15672"
       - "5672:5672"
     volumes:
-      - ./rabbitmq_data:/var/lib/rabbitmq/mnesia:rw 
+      - ./rabbitmq_volume:/var/lib/rabbitmq/mnesia:rw 
 
   redis:
     image: redis
     container_name: redis
+    command: redis-server --appendonly yes
     ports:
       - "6379:6379"  
+    volumes:
+      - ./redis_volume:/data
   
   mssql:
     image: mcr.microsoft.com/mssql/server
     container_name: mssql
     volumes:
-      - './mssql_data:/var/opt/mssql'
+      - './mssql_volume:/var/opt/mssql'
     environment:
       - SA_PASSWORD=Brt_z!py
       - ACCEPT_EULA=Y
@@ -44,12 +47,12 @@ services:
       context: ./react_ui
       dockerfile: Dockerfile
     container_name: workshop_ui
-    # volumes:
-    #   - './react_ui/:/ui' #container'ı restart etmeden refresh etmiyor, normal mi?
-    #   - '/ui/node_modules'
+    volumes:        
+      - './react_ui/:/ui' #container'ı restart etmeden refresh etmiyor, normal mi?
+      - '/ui/node_modules'
     ports:
       - '5001:3000'
     environment:
       - NODE_ENV=development
-    depends_on:
-      - api
+    # depends_on:
+    #   - api
