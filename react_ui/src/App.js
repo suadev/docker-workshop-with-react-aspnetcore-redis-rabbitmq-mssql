@@ -6,18 +6,21 @@ class App extends Component {
     super(props);
     this.state = {
       redisKeys: [],
-      todoList: []
+      todoList: [],
+      logs: []
     }
 
     this.sendToRedis = this.sendToRedis.bind(this);
     this.getFromRedis = this.getFromRedis.bind(this);
     this.sendToMssql = this.sendToMssql.bind(this);
     this.getFromMssql = this.getFromMssql.bind(this);
+    this.getLogs = this.getLogs.bind(this);
   }
 
   componentDidMount() {
     this.getFromRedis();
     this.getFromMssql();
+    this.getLogs();
   }
 
   sendToRedis(e) {
@@ -36,7 +39,8 @@ class App extends Component {
       })
     })
       .then(function (response) {
-        self.getFromRedis()
+        self.getFromRedis();
+        self.getLogs();
       })
   }
 
@@ -56,7 +60,8 @@ class App extends Component {
       })
     })
       .then(function (response) {
-        self.getFromMssql()
+        self.getFromMssql();
+        self.getLogs();
       })
   }
 
@@ -102,11 +107,32 @@ class App extends Component {
       });
   }
 
+  getLogs() {
+    let self = this;
+    fetch('http://localhost:5000/api/logs/', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (json) {
+        self.setState({
+          logs: json
+        })
+      })
+      .catch(function () {
+        console.log("error");
+      });
+  }
+
   render() {
     return (
       <div>
         <form onSubmit={this.sendToRedis}>
-          <h1>Redis Form - Random Key/Value</h1>
+          <h1>Redis Container - Random Key/Value</h1>
           <label>
             <b>Key:</b>
             <input type="text" ref={(key) => this.rediskey = key} />
@@ -127,7 +153,7 @@ class App extends Component {
         <hr />
         <br />
         <form onSubmit={this.sendToMssql}>
-          <h1>MsSQL Form - Todo List</h1>
+          <h1>MS-SQL Container - Todo List</h1>
           <label>
             <b>What to do?:</b>
             <input type="textarea" ref={(description) => this.tododescription = description} />
@@ -147,6 +173,11 @@ class App extends Component {
         <br />
         <hr />
         <br />
+        <h1>RabbitMQ Container - Logs</h1>
+        <br />
+        {this.state.logs.map(function (item, index) {
+          return <li key={index}>{item}</li>;
+        })}
       </div>
     );
   }

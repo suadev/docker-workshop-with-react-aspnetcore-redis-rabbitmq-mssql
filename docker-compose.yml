@@ -7,8 +7,8 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
-    volumes:
-      - ./rabbitmq_volume:/var/lib/rabbitmq/mnesia
+    # volumes:
+    #   - ./rabbitmq_volume:/var/lib/rabbitmq/mnesia
 
   redis:
     image: redis
@@ -16,19 +16,19 @@ services:
     command: redis-server --appendonly yes
     ports:
       - "6379:6379"  
-    volumes:
-      - ./redis_volume:/data
+    # volumes:
+    #   - ./redis_volume:/data
   
   mssql:
     image: mcr.microsoft.com/mssql/server
     container_name: mssql
-    volumes:
-      - ./mssql_volume:/var/opt/mssql
     environment:
       - SA_PASSWORD=Brt_z!py
       - ACCEPT_EULA=Y
     ports:
       - "1433:1433"
+    # volumes:
+    #   - ./mssql_volume:/var/opt/mssql
 
   api:
     build:
@@ -47,11 +47,11 @@ services:
       context: ./react_ui
       dockerfile: Dockerfile
     container_name: workshop_ui
-    volumes:        
-      - ./react_ui:/ui
     ports:
       - '5001:3000'
     environment:
       - NODE_ENV=development
     depends_on:
       - api
+    # volumes:        
+    #   - ./react_ui:/ui

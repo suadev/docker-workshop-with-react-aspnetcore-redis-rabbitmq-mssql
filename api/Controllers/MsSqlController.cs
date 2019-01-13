@@ -21,6 +21,7 @@ namespace api.Controllers
             {
                 _dbContext.Add(model);
                 await _dbContext.SaveChangesAsync();
+                RabbitMqClient.Publish($"New todo item was successfully inserted into MS-SQL - > {model.Description}");
                 return Ok();
             }
             return BadRequest();

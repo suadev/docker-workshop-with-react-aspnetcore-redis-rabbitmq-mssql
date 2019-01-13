@@ -13,7 +13,7 @@ namespace aspnet_core_docker_workshop
 
         public RedisDatabase()
         {
-            _connection = ConnectionMultiplexer.Connect("redis:6379"); //local -> localhost:6379
+            _connection = ConnectionMultiplexer.Connect("redis"); //local -> localhost:6379
             _db = _connection.GetDatabase();
         }
 
@@ -36,7 +36,7 @@ namespace aspnet_core_docker_workshop
         {
             int dbName = 0;
             var dicKeyValue = new Dictionary<string, string>();
-            var keys = _connection.GetServer("redis:6379").Keys(dbName, pattern: "*");
+            var keys = _connection.GetServer("redis", 6379).Keys(dbName, pattern: "*");
             var keysArr = keys.Select(key => (string)key).ToArray();
 
             foreach (var key in keysArr)

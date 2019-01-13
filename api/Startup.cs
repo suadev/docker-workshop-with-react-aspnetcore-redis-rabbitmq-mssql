@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Text;
+using api;
 using api.Data;
-using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 
 namespace aspnet_core_docker_workshop
 {
@@ -46,16 +49,8 @@ namespace aspnet_core_docker_workshop
             var connectionStr = "Server=mssql;database=docker-workshop;user id=sa;password=Brt_z!py;"; //container
             services.AddDbContext<TodoListDBContext>(options => options.UseSqlServer(connectionStr));
 
-
             services.AddMvc();
-            // var bus = Bus.Factory.CreateUsingRabbitMq(cfg =>
-            // {
-            //     var host = cfg.Host(new Uri("rabbitmq://rabbitmq/"), h => { });
-            // });
-            // services.AddSingleton<IPublishEndpoint>(bus);
-            // services.AddSingleton<ISendEndpointProvider>(bus);
-            // services.AddSingleton<IBus>(bus);
-            // bus.Start();
+            services.AddSingleton<RabbitListener>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +63,7 @@ namespace aspnet_core_docker_workshop
             }
 
             app.UseMvc();
+            app.UseRabbitListener();
 
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
