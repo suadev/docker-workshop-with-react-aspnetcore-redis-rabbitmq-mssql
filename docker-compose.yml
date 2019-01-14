@@ -54,4 +54,5 @@ services:
     depends_on:
       - api
     # volumes:        
-    #   - ./react_ui:/ui
+    #   - ./react_ui/src:/ui/src
+    #   - ./react_ui/public:/ui/public
