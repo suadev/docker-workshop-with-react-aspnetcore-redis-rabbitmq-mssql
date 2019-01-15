@@ -1,8 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using api.Models;
-using aspnet_core_docker_workshop;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers

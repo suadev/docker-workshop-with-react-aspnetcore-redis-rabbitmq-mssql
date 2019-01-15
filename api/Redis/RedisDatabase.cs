@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using StackExchange.Redis;
 
-namespace aspnet_core_docker_workshop
+namespace api
 {
     public class RedisDatabase : IRedisDatabase
     {
@@ -53,10 +53,4 @@ namespace aspnet_core_docker_workshop
         }
     }
 
-    public interface IRedisDatabase
-    {
-        Task StringSetAsync(string key, string value);
-        Task<string> StringGetAsync(string key);
-        Task<Dictionary<string, string>> StringGetAllAsync(string pattern = "*");
-    }
 }

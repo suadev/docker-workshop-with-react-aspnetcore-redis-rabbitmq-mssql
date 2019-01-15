@@ -1,4 +1,3 @@
-using aspnet_core_docker_workshop;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 

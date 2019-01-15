@@ -1,13 +1,11 @@
-
-
-#docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Brt_z!py' -p 1433:1433 -d mcr.microsoft.com/mssql/server
+# --------- This Dockerfile will be using for restoring DB backup. Not ready for now. ------------
 
 FROM mcr.microsoft.com/mssql/server
 
-ENV ACCEPT_EULA=Y
-ENV SA_PASSWORD=Brt_z!py
+# ENV ACCEPT_EULA=Y
+# ENV SA_PASSWORD=Brt_z!py
 
-CMD [ "/opt/mssql/bin/sqlservr" ]
+# CMD [ "/opt/mssql/bin/sqlservr" ]
 
 # RUN apt-get update && apt-get install unzip -y
 
