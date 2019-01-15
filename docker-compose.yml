@@ -7,18 +7,23 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
-    # volumes:
-    #   - ./rabbitmq_volume:/var/lib/rabbitmq/mnesia
+    volumes:
+      - ./rabbitmq_volume:/var/lib/rabbitmq/mnesia
+    # healthcheck:
+    #     test: ["CMD", "curl", "-f", "http://localhost:15672"]
+    #     interval: 30s
+    #     timeout: 10s
+    #     retries: 5
 
   redis:
     image: redis
     container_name: redis
     command: redis-server --appendonly yes
     ports:
-      - "6379:6379"  
-    # volumes:
-    #   - ./redis_volume:/data
-  
+      - "6379:6379"
+    volumes:
+      - ./redis_volume:/data
+
   mssql:
     image: mcr.microsoft.com/mssql/server
     container_name: mssql
@@ -27,8 +32,8 @@ services:
       - ACCEPT_EULA=Y
     ports:
       - "1433:1433"
-    # volumes:
-    #   - ./mssql_volume:/var/opt/mssql
+    volumes:
+      - ./mssql_volume:/var/opt/mssql
 
   api:
     build:
@@ -37,13 +42,19 @@ services:
     container_name: workshop_api
     ports:
       - "5000:80"
+    restart: on-failure
     depends_on:
       - mssql
       - redis
       - rabbitmq
+       
+    links: 
+      - rabbitmq
+      - redis
+      - mssql
 
   ui:
-    build: 
+    build:
       context: ./react_ui
       dockerfile: Dockerfile
     container_name: workshop_ui
@@ -53,6 +64,6 @@ services:
       - NODE_ENV=development
     depends_on:
       - api
-    # volumes:        
-    #   - ./react_ui/src:/ui/src
-    #   - ./react_ui/public:/ui/public
+    volumes:
+      - ./react_ui/src:/ui/src
+      - ./react_ui/public:/ui/public
