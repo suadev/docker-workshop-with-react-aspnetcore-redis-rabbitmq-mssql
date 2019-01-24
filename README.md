@@ -4,12 +4,14 @@
 - Wait all containers to start.
 - Browse React UI -> http://localhost:5001/
 
-**P.S.**
-All volumes (redis, rabbitmq, mssql) are commented out in docker-compose.yml. 
+**Some Notes**
+- api service keeps waiting till mssql container ready to accept connections. This waiting feature was implemented with wait-for-it.
+(https://github.com/vishnubob/wait-for-it)
+- redis and rabbitmq containers are faster than mssql container on starting and accepting connections.That's why api service waits only mssql.
+- mssql, redis and rabbitmq volumes are exist and active by defauls in docker-compose.yml
 
 **Todo**
-- React hot-loading for development environment
-- Keep waiting api service untill rabbitmq and mssql completely start, by using custom shell script. 
+- React hot-loading for development environment (It works on linux host but not in windows. Any help?)
 
 ## Sample Screencast
 
