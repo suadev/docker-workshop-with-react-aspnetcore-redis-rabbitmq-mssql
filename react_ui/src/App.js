@@ -175,7 +175,7 @@ class App extends Component {
         <br />
         <h1>RabbitMQ Container - Logs</h1>
         <br />
-        {this.state.logs.map(function (item, index) {
+        {this.state.logs && this.state.logs.map(function (item, index) {
           return <li key={index}>{item}</li>;
         })}
       </div>
