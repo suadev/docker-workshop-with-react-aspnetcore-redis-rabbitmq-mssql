@@ -4,6 +4,7 @@ services:
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
+    restart: on-failure
     ports:
       - "15672:15672"
       - "5672:5672"
@@ -13,6 +14,7 @@ services:
   redis:
     image: redis
     container_name: redis
+    restart: on-failure
     command: redis-server --appendonly yes
     ports:
       - "6379:6379"  
@@ -22,6 +24,7 @@ services:
   mssql:
     image: mcr.microsoft.com/mssql/server
     container_name: mssql
+    restart: on-failure
     environment:
       - SA_PASSWORD=Brt_z!py
       - ACCEPT_EULA=Y
@@ -35,6 +38,7 @@ services:
       context: ./api
       dockerfile: Dockerfile
     container_name: workshop_api
+    restart: on-failure
     ports:
       - "5000:80"
     depends_on:
@@ -48,6 +52,7 @@ services:
       context: ./react_ui
       dockerfile: Dockerfile
     container_name: workshop_ui
+    restart: on-failure
     ports:
       - '5001:3000'
     environment:
