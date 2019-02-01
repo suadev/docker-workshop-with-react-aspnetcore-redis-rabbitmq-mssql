@@ -57,8 +57,9 @@ services:
       - '5001:3000'
     environment:
       - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
     depends_on:
       - api
-    # volumes:        
-    #   - ./react_ui/src:/ui/src
-    #   - ./react_ui/public:/ui/public
+    volumes:        
+      - ./react_ui/src:/ui/src
+      - '/ui/node_modules'
