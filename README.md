@@ -1,3 +1,7 @@
+
+[![Build Status](https://dev.azure.com/suadev0095/docker-workshop/_apis/build/status/suadev.docker-workshop-with-react-aspnetcore-redis-rabbitmq-mssql?branchName=master)](https://dev.azure.com/suadev0095/docker-workshop/_build/latest?definitionId=1&branchName=master)
+
+
 **Running with Docker-Compose**
 
 - In the root directory of the project run "**docker-compose up**" command.
