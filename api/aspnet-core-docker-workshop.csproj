@@ -6,10 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.2.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.RabbitMQ" Version="2.2.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="2.2.2" />
+    <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="2.2.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI" Version="2.2.10" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />    
     <PackageReference Include="RabbitMQ.Client" Version="5.1.0" />  
-
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.0" />  
