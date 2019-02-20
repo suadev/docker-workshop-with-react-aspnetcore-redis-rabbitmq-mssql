@@ -13,7 +13,7 @@
 (https://github.com/vishnubob/wait-for-it)
 - redis and rabbitmq containers are faster than mssql container on starting and accepting connections.That's why api service waits only mssql.
 - mssql, redis and rabbitmq volumes are exist and active by defauls in docker-compose.yml
--React hot-reloading is working on development environment.
+- React hot-reloading is working on development environment.
 
 
 ## Sample Screencast
