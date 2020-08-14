@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.2.102-sdk-stretch AS build-env
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build-env
 
 WORKDIR /api
 
@@ -10,7 +10,7 @@ COPY . ./
 
 RUN dotnet publish -c Release -o out
 
-FROM microsoft/dotnet:2.2.1-aspnetcore-runtime-stretch-slim
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim
 
 WORKDIR /api
 

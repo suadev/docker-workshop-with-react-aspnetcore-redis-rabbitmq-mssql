@@ -22,11 +22,11 @@ namespace aspnet_core_docker_workshop
         {
             services.AddSingleton<IRedisDatabase, RedisDatabase>();
 
-            services.AddMvc()
-            .AddJsonOptions(options =>
-            {
-                options.SerializerSettings.DateFormatString = "dd.MM.yyyy";
-            });
+            services.AddMvc();
+            //.AddJsonOptions(options =>
+            //{
+            //    options.SerializerSettings.DateFormatString = "dd.MM.yyyy";
+            //});
 
             services.AddCors(options =>
             {
